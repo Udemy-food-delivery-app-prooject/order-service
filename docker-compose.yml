@@ -1,0 +1,13 @@
+services:
+  mongo:
+    image: mongo:6.0  # Or the latest stable mongo version
+    container_name: mongo-foodcatalogue-service
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo/data:/data/db            # Persist data
+      - ./docker/mongo/init.js:/docker-entrypoint-initdb.d/init.js # optional init script if you have one
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root   # optional for auth
+      MONGO_INITDB_ROOT_PASSWORD: mongo # optional for auth
+      MONGO_INITDB_DATABASE: order_db # optional to create db on startup
